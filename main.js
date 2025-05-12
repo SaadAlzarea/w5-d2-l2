@@ -5,21 +5,59 @@ let postSubmitBtn = document.getElementById("post-submit-btn");
 let inputImageUrl = document.getElementById("input-image-url");
 
 postSubmitBtn.addEventListener("click", () => {
-  fetch("https://68219a2d259dad2655afc2ba.mockapi.io/post", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      username: inputUsername.value,
-      textarea: inputText.value,
-      img: inputImageUrl.value,
-    }),
-  }).then(() => {
-    location.reload();
-  });
+  // Fetch existing usernames to check for duplicates
+  fetch("https://68219a2d259dad2655afc2ba.mockapi.io/post")
+    .then((response) => response.json())
+    .then((data) => {
+      // Validation Flags
+      let isValid = true;
+
+      // username validation
+      const username = inputUsername.value;
+      const duplicateUsername = data.find(
+        (post) => post.username.toLowerCase() === username.toLowerCase()
+      );
+
+      if (duplicateUsername) {
+        alert("This username is already eexist");
+        isValid = false;
+      }
+
+      // textarea validation
+      const textarea = inputText.value;
+      if (textarea.length <= 6) {
+        alert("Textarea must contain more than 6 characters.");
+        isValid = false;
+      }
+
+      // image validation
+      const img = inputImageUrl.value;
+      if (img === "") {
+        alert("Image URL is required.");
+        isValid = false;
+      }
+
+      // If all validations pass
+      if (isValid) {
+        fetch("https://68219a2d259dad2655afc2ba.mockapi.io/post", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username,
+            textarea: textarea,
+            img: img,
+          }),
+        }).then(() => {
+          location.reload();
+        });
+      }
+
+    });
 });
 
+// Fetch and display posts
 fetch("https://68219a2d259dad2655afc2ba.mockapi.io/post")
   .then((response) => response.json())
   .then((data) => {
@@ -29,7 +67,6 @@ fetch("https://68219a2d259dad2655afc2ba.mockapi.io/post")
       let textParagraph = document.createElement("p");
       let postImage = document.createElement("img");
       let deleteButton = document.createElement("button");
-      
 
       deleteButton.addEventListener("click", () => {
         fetch(
