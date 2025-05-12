@@ -1,0 +1,131 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Posts Container */
+#posts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+/* Post Input */
+.post-input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+}
+
+.post-input h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+}
+
+.post-input input,
+.post-input textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.post-input input:focus,
+.post-input textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.post-input textarea {
+  resize: none;
+  height: 80px;
+}
+
+/* Button Styling */
+#post-submit-btn {
+  align-self: center;
+  width: 50%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#post-submit-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #posts-container {
+    padding: 15px;
+  }
+
+  .post-input h4 {
+    font-size: 14px;
+  }
+
+  .post-input input,
+  .post-input textarea {
+    font-size: 13px;
+  }
+
+  #post-submit-btn {
+    font-size: 14px;
+    padding: 8px;
+    width: 60%;
+  }
+}
+
+@media (max-width: 480px) {
+  #posts-container {
+    padding: 10px;
+    max-width: 90%;
+  }
+
+  .post-input h4 {
+    font-size: 12px;
+  }
+
+  .post-input input,
+  .post-input textarea {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  #post-submit-btn {
+    font-size: 12px;
+    padding: 6px;
+    width: 80%;
+  }
+}
